@@ -26,7 +26,7 @@
           inherit ds4;
           default = ds4;
         } // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
-          # Convenience variant for an RDNA3 discrete GPU; Uds4-gfx1100 = pkgs.callPackage ./package.nix { rocmArch = "gfx1100"; };
+          # Convenience variant for an RDNA3 discrete GPU; adjust as needed.
           ds4-gfx1100 = pkgs.callPackage ./package.nix { rocmArch = "gfx1100"; };
         }
       );
@@ -47,7 +47,7 @@
         {
           default = pkgs.mkShell {
             inputsFrom = [ self.packages.${system}.ds4 ];
-            packages = lib.optional pkgs.stdenv.hostPlatform.isLinux [
+            packages = lib.optionals pkgs.stdenv.hostPlatform.isLinux [
               pkgs.rocmPackages.rocminfo
               pkgs.rocmPackages.rocm-smi
             ];
