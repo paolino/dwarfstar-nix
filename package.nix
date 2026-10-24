@@ -51,13 +51,13 @@ let
 in
 stdenv.mkDerivation {
   pname = "ds4";
-  version = "0-unstable-2026-10-07";
+  version = "0-unstable-2026-10-19";
 
   src = fetchFromGitHub {
     owner = "antirez";
     repo = "ds4";
-    rev = "fc80bd695da76ee14bcb86820bf900a5cdfda806";
-    hash = "sha256-0e9pONUeb93KDlPbAzUjK7pLgyqGhg0mWkKnvc1Ty5k=";
+    rev = "5379c1c9ac315f1540371b06a3db88491d4059ff";
+    hash = "sha256-0uMUeTwx16T8KLHlPB2jsK7bgA3qaYYuD6xUbhtCfvk=";
   };
 
   # Tools that must be on PATH during the build:
@@ -124,7 +124,7 @@ stdenv.mkDerivation {
       # whose bundled clang cannot host-link on NixOS (no bare ld/crt/dynamic-linker).
       # Build the device object with hipcc, then host-link with Nix's wrapped g++.
       make -B ds4 ds4-server ds4-bench ds4-eval ds4-agent \
-        CORE_OBJS='ds4.o ds4_image.o ds4_distributed.o ds4_tp.o ds4_ssd.o ds4_rocm.o ds4_rocm_compat.o ds4_rocm_unavailable.o ds4_layer_pack.o $(ROCM_MMQ_OBJS)' \
+        CORE_OBJS='ds4.o ds4_image.o ds4_distributed.o ds4_engram.o ds4_tp.o ds4_ssd.o ds4_rocm.o ds4_rocm_compat.o ds4_rocm_unavailable.o ds4_layer_pack.o $(ROCM_MMQ_OBJS)' \
         CC=cc \
         CFLAGS="-O3 -ffast-math -g -Wall -Wextra -std=c99 -D_GNU_SOURCE -fno-finite-math-only -DDS4_ROCM_BUILD" \
         HIPCC=hipcc \
